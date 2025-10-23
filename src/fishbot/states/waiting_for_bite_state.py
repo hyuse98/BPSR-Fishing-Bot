@@ -9,6 +9,13 @@ class WaitingForBiteState(BotState):
 
     def handle(self, screen):
 
+        # --- [GUARD RAIL 1 (Interceptor)] ---
+        new_state = self.level_check_interceptor.check(screen)
+        if new_state:
+            self.bot.log("[WAITING_FOR_BITE] ⚠️ Level Check detectado durante a espera pelo peixe.")
+            return new_state
+        # --- [FIM DO GUARD RAIL] ---
+
         pos = self.detector.find(screen, "exclamation", debug=self.bot.debug_mode)
         
         if pos:
