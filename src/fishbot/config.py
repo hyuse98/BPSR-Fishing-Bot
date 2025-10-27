@@ -29,10 +29,19 @@ class Config:
         self.monitor_y = 0
         -------------------------------------------------------------------
         """
-        self.monitor_x = -1920
+        self.monitor_x = 0
         self.monitor_y = 0
         self.monitor_width = 1920
         self.monitor_height = 1080
+
+        self.state_timeouts = {
+            "STARTING": 15,
+            "CHECKING_ROD": 15,
+            "CASTING_BAIT": 15,
+            "WAITING_FOR_BITE": 120,
+            "PLAYING_MINIGAME": 60,
+            "FINISHING": 30
+        }
 
         #Habilitar finalização rápida após o minigame
         self.quick_finish_enabled = True
