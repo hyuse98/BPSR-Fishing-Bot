@@ -88,9 +88,7 @@ class FishingBot:
             self.log("\n🛑 Bot encerrado pelo usuário")
             try:
                 self.log("... Soltando todas as teclas e mouse.")
-                self.controller.mouse_up('left')
-                self.controller.key_up('a')
-                self.controller.key_up('d')
+                self.controller.release_all_controls()
             except Exception as e:
                 pass
             self.show_stats()

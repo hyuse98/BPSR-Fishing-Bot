@@ -44,3 +44,10 @@ class GameController:
 
     def key_up(self, key):
         auto.keyUp(key)
+
+    def release_all_controls(self):
+        print("    ⚠️  Soltando todos os controles...")
+        self.mouse_up('left')
+        self.mouse_up('right')
+        self.key_up('a')
+        self.key_up('d')
