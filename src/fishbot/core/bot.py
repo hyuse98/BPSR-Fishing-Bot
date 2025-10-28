@@ -1,6 +1,6 @@
 import time
 
-from .config import Config
+from ..config import Config
 from .controller import GameController
 from .detector import Detector
 from .interceptors.level_check_interceptor import LevelCheckInterceptor
@@ -14,13 +14,12 @@ from .states.waiting_for_bite_state import WaitingForBiteState
 
 class FishingBot:
     def __init__(self):
-
         self.config = Config()
         self.detector = Detector(self.config)
         self.controller = GameController(self.config)
 
         self.running = True
-        self.debug_mode = self.config.debug_mode
+        self.debug_mode = self.config.bot.debug_mode
         self.stats = {
             'cycles': 0,
             'fish_caught': 0,
@@ -45,13 +44,11 @@ class FishingBot:
         self.state_start_time = time.time()
 
     def log(self, message):
-
         timestamp = time.strftime("%H:%M:%S")
         print(f"[{timestamp}] {message}")
 
     def check_state_timeout(self):
-
-        timeout_limit = self.config.state_timeouts.get(self.current_state_name)
+        timeout_limit = self.config.bot.state_timeouts.get(self.current_state_name)
 
         if not timeout_limit:
             return False
@@ -75,7 +72,6 @@ class FishingBot:
         return False
 
     def set_state(self, new_state_name, force=False):
-
         if not force and new_state_name == self.current_state_name:
             return
 
@@ -96,13 +92,13 @@ class FishingBot:
     def run(self):
         self.log("🎣 Bot iniciado! Pressione Ctrl+C para parar")
         self.log("⚠️  IMPORTANTE: Mantenha o jogo em FOCO (janela ativa)")
-        self.log(f"⚙️  Precisão: {self.config.precision * 100:.0f}%")
-        self.log(f"⚙️  FPS alvo: {'MAX' if self.config.target_fps == 0 else self.config.target_fps}")
+        self.log(f"⚙️  Precisão: {self.config.bot.precision * 100:.0f}%")
+        self.log(f"⚙️  FPS alvo: {'MAX' if self.config.bot.target_fps == 0 else self.config.bot.target_fps}")
         self.log("\n🕐 Aguardando 5 segundos para você focar no jogo...")
         time.sleep(5)
         self.log("▶️  Iniciando bot!\n")
 
-        target_delay = 1.0 / self.config.target_fps if self.config.target_fps > 0 else 0
+        target_delay = 1.0 / self.config.bot.target_fps if self.config.bot.target_fps > 0 else 0
 
         try:
             while self.running:

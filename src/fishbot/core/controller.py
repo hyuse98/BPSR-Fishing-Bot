@@ -5,7 +5,7 @@ import pyautogui as auto
 
 class GameController:
     def __init__(self, config):
-        self.config = config
+        self.config = config.bot
         auto.FAILSAFE = True
         auto.PAUSE = 0.05
 

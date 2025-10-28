@@ -63,7 +63,7 @@ class Config:
         self.new_rod_coord = (1626, 565)
 
         # Pasta dos templates
-        self.templates_path = "./assets/"
+        self.templates_path = "src/fishbot/assets/templates/"
 
         # Templates
         self.templates = {
