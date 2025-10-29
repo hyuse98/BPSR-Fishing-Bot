@@ -1,6 +1,5 @@
 import time
 
-from ..config import Config
 from .controller import GameController
 from .detector import Detector
 from .interceptors.level_check_interceptor import LevelCheckInterceptor
@@ -10,6 +9,7 @@ from .states.finishing_state import FinishingState
 from .states.playing_minigame_state import PlayingMinigameState
 from .states.starting_state import StartingState
 from .states.waiting_for_bite_state import WaitingForBiteState
+from ..config import Config
 
 
 class FishingBot:

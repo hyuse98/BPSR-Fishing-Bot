@@ -1,0 +1,5 @@
+opencv-python~=4.12.0.88
+numpy~=2.2.6
+mss~=10.1.0
+PyAutoGUI~=0.9.54
+python-dotenv~=25.3
