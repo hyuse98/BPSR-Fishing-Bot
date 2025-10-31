@@ -1,5 +1,3 @@
-from .paths import TEMPLATES_PATH
-
 class BotConfig:
 
     def __init__(self):

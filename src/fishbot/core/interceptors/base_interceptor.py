@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
 
-class BaseInterceptor(ABC):
+from ..bot_component import BotComponent
+
+
+class BaseInterceptor(BotComponent, ABC):
 
     def __init__(self, bot):
-        self.bot = bot
-        self.detector = bot.detector
-        self.controller = bot.controller
+        super().__init__(bot)
 
     @abstractmethod
     def check(self, screen):

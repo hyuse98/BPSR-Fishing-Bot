@@ -12,15 +12,12 @@ class PlayingMinigameState(BotState):
 
     def handle(self, screen):
 
-        # --- [GUARD RAIL 1 (Interceptor)] ---
-        new_state = self.level_check_interceptor.check(screen)
-        if new_state:
-            self.bot.log("[MINIGAME] ⚠️ Level Check detectado durante o minigame.")
-            self.controller.mouse_up('left')
-            self.controller.key_up('a')
-            self.controller.key_up('d')
-            return new_state
-        # --- [FIM DO GUARD RAIL] ---
+        # # --- [GUARD RAIL 1 (Interceptor)] ---
+        # new_state = self.level_check_interceptor.check(screen)
+        # if new_state:
+        #     self.bot.log("[MINIGAME] ⚠️ Level Check detectado durante o minigame.")
+        #     return new_state
+        # # --- [FIM DO GUARD RAIL] ---
 
         if self.detector.find(screen, "success"):
             self.bot.log("[MINIGAME] 🐟 Peixe capturado!")

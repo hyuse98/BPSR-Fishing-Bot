@@ -11,9 +11,7 @@ class LevelCheckInterceptor(BaseInterceptor):
             self.bot.log("[GUARD RAIL 1] ⚠️  UI de 'Level Check' detectada!")
             self.bot.log("[GUARD RAIL 1] Resetando para o estado de checagem de vara.")
 
-            self.controller.mouse_up('left')
-            self.controller.key_up('a')
-            self.controller.key_up('d')
+            self.controller.release_all_controls()
 
             if hasattr(self.bot.states["PLAYING_MINIGAME"], '_current_arrow'):
                 self.bot.states["PLAYING_MINIGAME"]._current_arrow = None
