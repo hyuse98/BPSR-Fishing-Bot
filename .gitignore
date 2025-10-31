@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# IDE / Editor directories
+# JetBrains IDEs (PyCharm, IntelliJ, etc.)
+.idea/
+
+# VSCode
+.vscode/
+
+# Log files
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Secrets and local configuration
+.env
