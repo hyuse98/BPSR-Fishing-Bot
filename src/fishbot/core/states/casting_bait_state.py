@@ -9,8 +9,8 @@ class CastingBaitState(BotState):
         self.bot.log("[CASTING_BAIT] 🎣 Aguardando 1.5 segundos...")
         time.sleep(1.5)
 
-        center_x = self.config.monitor_width // 2 + self.config.monitor_x
-        center_y = self.config.monitor_height // 2 + self.config.monitor_y
+        center_x = self.config.screen.monitor_width // 2 + self.config.screen.monitor_x
+        center_y = self.config.screen.monitor_height // 2 + self.config.screen.monitor_y
 
         self.bot.log(f"[CASTING_BAIT] 📍 Movendo mouse para centro da tela ({center_x}, {center_y})")
         self.controller.move_to(center_x, center_y)

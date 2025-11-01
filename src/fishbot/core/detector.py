@@ -13,20 +13,23 @@ class Detector:
     def __init__(self, config):
         self.unified_config = config
         self.config = config.bot
+        self.detection_config = self.config.detection
+        self.screen_config = self.config.screen
+
         self.templates = self._load_templates()
         self.sct = mss.mss()
         self.monitor = {
-            'left': self.config.monitor_x,
-            'top': self.config.monitor_y,
-            'width': self.config.monitor_width,
-            'height': self.config.monitor_height
+            'left': self.screen_config.monitor_x,
+            'top': self.screen_config.monitor_y,
+            'width': self.screen_config.monitor_width,
+            'height': self.screen_config.monitor_height
         }
         print("✅ MSS inicializado")
 
     def _load_templates(self):
         loaded = {}
         print("\n📦 Carregando templates...")
-        for name in self.config.templates:
+        for name in self.detection_config.templates:
             path = self.unified_config.get_template_path(name)
             if path and path.exists():
                 img = cv.imread(str(path), cv.IMREAD_UNCHANGED)
@@ -49,10 +52,10 @@ class Detector:
             return None
 
         template = self.templates[template_name]
-        roi_config = self.config.rois.get(template_name)
+        roi_config = self.detection_config.rois.get(template_name)
 
         if isinstance(roi_config, str):
-            roi = self.config.rois.get(roi_config)
+            roi = self.detection_config.rois.get(roi_config)
         else:
             roi = roi_config
 
@@ -79,12 +82,12 @@ class Detector:
         _, confidence, _, location = cv.minMaxLoc(result)
 
         if debug:
-            print(f"  [{template_name}] Confiança: {confidence:.2%} (precisa: {self.config.precision:.0%})")
+            print(f"  [{template_name}] Confiança: {confidence:.2%} (precisa: {self.detection_config.precision:.0%})")
 
-        if confidence >= self.config.precision:
+        if confidence >= self.detection_config.precision:
             h_t, w_t = template.shape[:2]
-            center = (location[0] + w_t // 2 + offset_x + self.config.monitor_x,
-                      location[1] + h_t // 2 + offset_y + self.config.monitor_y)
+            center = (location[0] + w_t // 2 + offset_x + self.screen_config.monitor_x,
+                      location[1] + h_t // 2 + offset_y + self.screen_config.monitor_y)
             return center
 
         return None

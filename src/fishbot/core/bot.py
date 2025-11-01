@@ -1,5 +1,6 @@
 import time
 
+from src.fishbot.config import Config
 from .controller import GameController
 from .detector import Detector
 from .interceptors.level_check_interceptor import LevelCheckInterceptor
@@ -9,7 +10,6 @@ from .states.finishing_state import FinishingState
 from .states.playing_minigame_state import PlayingMinigameState
 from .states.starting_state import StartingState
 from .states.waiting_for_bite_state import WaitingForBiteState
-from ..config import Config
 
 
 class FishingBot:
@@ -92,7 +92,7 @@ class FishingBot:
     def run(self):
         self.log("🎣 Bot iniciado! Pressione Ctrl+C para parar")
         self.log("⚠️  IMPORTANTE: Mantenha o jogo em FOCO (janela ativa)")
-        self.log(f"⚙️  Precisão: {self.config.bot.precision * 100:.0f}%")
+        self.log(f"⚙️  Precisão: {self.config.bot.detection.precision * 100:.0f}%")
         self.log(f"⚙️  FPS alvo: {'MAX' if self.config.bot.target_fps == 0 else self.config.bot.target_fps}")
         self.log("\n🕐 Aguardando 5 segundos para você focar no jogo...")
         time.sleep(5)
