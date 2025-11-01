@@ -14,7 +14,8 @@ class Config:
         }
 
     def get_template_path(self, template_name):
-        filename = self.bot.templates.get(template_name)
+        filename = self.bot.detection.templates[template_name]
+
         if filename:
             return self.paths['templates'] / filename
         return None
