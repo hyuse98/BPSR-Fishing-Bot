@@ -20,13 +20,13 @@ class DetectionConfig:
         }
 
         self.rois = {
-            "fishing_spot": (1400, 540, 121, 55),
-            "broken_rod": (1636, 985, 250, 60),
-            "new_rod": (1626, 565, 183, 65),
-            "exclamation": (932, 441, 49, 139),
-            "left_arrow": (750, 490, 210, 100),
-            "right_arrow": (960, 490, 210, 100),
+            "fishing_spot": None,
+            "broken_rod": None,
+            "new_rod": None,
+            "exclamation": None,
+            "left_arrow": None,
+            "right_arrow": None,
             "success": None,
-            "continue": (1442, 945, 301, 71),
-            "level_check": (1101, 985, 131, 57)
+            "continue": None,
+            "level_check": None
         }
