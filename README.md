@@ -1,157 +1,156 @@
 <p align="right">
-  <a href="./README.en.md">English</a> |
-  <a href="./README.md">Português (Brasil)</a>
+  <a href="./README.pt-br.md.md">Português (Brasil)</a>
 </p>
 
-<p align="left">
-    <a href="#"><img alt="Status do Build" src="https://github.com/seu-usuario/BPSR-Fishing-Bot/actions/workflows/main.yml/badge.svg"></a>
-    <a href="#"><img alt="Versão do Projeto" src="https://img.shields.io/badge/version-1.0.0-blue"></a>
-    <a href="./LICENSE"><img alt="Licença" src="https://img.shields.io/badge/license-GPL--3.0-brightgreen"></a>
+<p align="left">    
+    <a href="#"><img alt="Project Version" src="https://img.shields.io/badge/version-1.0.0-blue"></a>
+    <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-brightgreen"></a>
     <a href="https://www.python.org"><img alt="Python" src="https://img.shields.io/badge/Python-3.8+-3776AB?logo=python"></a>
     <a href="https://opencv.org"><img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-4.x-5C3EE8?logo=opencv"></a>
 </p>
 
-# BPSR Fishing Bot
+# BPSR: Fishing Bot
 
-Um bot de pesca automatizado e de código aberto, construído em Python. Ele utiliza detecção de imagem para identificar eventos na tela e interagir com o minigame de pesca de um jogo, automatizando todo o processo.
-
----
-
-## 📜 Sumário
-
-*   [✨ Funcionalidades](#-funcionalidades)
-*   [🚀 Guia de Início Rápido](#-guia-de-início-rápido)
-    *   [Pré-requisitos](#1-pré-requisitos)
-    *   [Instalação](#2-instalação)
-    *   [Como Executar](#3-como-executar)
-*   [⚠️ Problemas Conhecidos e Soluções](#️-problemas-conhecidos-e-soluções)
-*   [⚙️ Configuração](#️-configuração)
-*   [🔧 Para Desenvolvedores](#-para-desenvolvedores)
-    *   [Arquitetura](#arquitetura)
-    *   [Estrutura do Projeto](#estrutura-do-projeto)
-*   [🎯 Planos Futuros](#-planos-futuros)
+An automated and open-source fishing bot built in Python. It uses image detection to identify on-screen events and interact with a game's fishing minigame, automating the entire process.
 
 ---
 
-## ✨ Funcionalidades
+##  Table of Contents
 
-*   **Pesca Totalmente Automatizada:** Lança a isca, detecta a fisgada e inicia o minigame.
-*   **Minigame Player Inteligente:** Joga o minigame de forma autônoma, movendo para a esquerda e para a direita conforme necessário.
-*   **Troca Automática de Vara:** Detecta quando a vara de pescar quebra e a substitui por uma nova, permitindo sessões de pesca ininterruptas.
-*   **Configuração Flexível:** Permite ajustar facilmente a precisão da detecção, as regiões de interesse (ROI) e os tempos de espera através de arquivos de configuração dedicados.
-*   **Arquitetura Robusta:** Construído com uma máquina de estados e princípios de design sólidos, tornando o código fácil de entender e estender.
+*   [Features](#features)
+*   [Quick Start Guide](#quick-start-guide)
+    *   [Prerequisites](#1-prerequisites)
+    *   [Installation](#2-installation)
+    *   [How to Run](#3-how-to-run)
+*   [Known Issues and Solutions](#known-issues-and-solutions)
+*   [Configuration](#configuration)
+*   [For Developers](#for-developers)
+    *   [Architecture](#architecture)
+    *   [Project Structure](#project-structure)
+*   [Future Plans](#future-plans)
 
 ---
 
-## 🚀 Guia de Início Rápido
+## Features
 
-### 1. Pré-requisitos
+*   **Fully Automated Fishing:** Casts the line, detects a bite, and starts the minigame.
+*   **Smart Minigame Player:** Autonomously plays the fishing minigame, moving left and right as needed.
+*   **Automatic Rod Swapping:** Detects when the fishing rod breaks and replaces it with a new one, allowing for uninterrupted fishing sessions.
+*   **Flexible Configuration:** Allows for easy adjustment of detection precision, regions of interest (ROI), and wait times through dedicated configuration files.
+*   **Robust Architecture:** Built with a state machine and solid design principles, making the code easy to understand and extend.
+
+---
+
+## Quick Start Guide
+
+### 1. Prerequisites
 
 *   **Python 3.8+**
-*   O jogo configurado para rodar em modo janela na resolução **1920x1080** (Por Enquanto...).
+*   The game configured to run in windowed mode at **1920x1080** resolution (for now...).
 
-### 2. Instalação
+### 2. Installation
 
-1.  Clone este repositório:
+1.  Clone this repository:
     ```bash
-    git clone https://github.com/seu-usuario/BPSR-Fishing-Bot.git
+    git clone https://github.com/your-username/BPSR-Fishing-Bot.git
     cd BPSR-Fishing-Bot
     ```
 
-2.  Instale as dependências a partir do `requirements.txt`:
+2.  Install the dependencies from `requirements.txt`:
     ```bash
     pip install -r requirements.txt
     ```
 
-### 3. Como Executar
+### 3. How to Run
 
-1.  Abra o jogo e certifique-se de que ele esteja visível na tela.
-2.  Execute o bot a partir da pasta raiz do projeto:
+1.  Open the game and make sure it is visible on the screen.
+2.  Run the bot from the project's root folder:
     ```bash
     python main.py
     ```
-3.  O bot iniciará a execução. Para pará-lo, pressione `Ctrl+C` no terminal.
+3.  The bot will start running. To stop it, press `Ctrl+C` in the terminal.
 
 ---
 
-## ⚠️ Problemas Conhecidos e Soluções
+## Known Issues and Solutions
 
-Esta seção lista problemas comuns que você pode encontrar e como resolvê-los.
+This section lists common issues you might encounter and how to solve them.
 
-### A detecção de um item (ex: vara quebrada, fisgada) para de funcionar
+### The detection of an item (e.g., broken rod, fish bite) stops working
 
-*   **Sintoma:** O bot para de reagir a um evento específico que antes funcionava, como não trocar a vara quebrada ou não detectar a fisgada.
-*   **Causa Provável:** O jogo pode ter recebido uma pequena atualização visual, alterando a aparência do ícone ou da imagem que o bot procura.
-*   **Solução:**
-    1.  **Tire uma nova captura de tela** da imagem que falhou (ex: o ícone da vara quebrada).
-    2.  **Substitua o arquivo de template** correspondente na pasta `src/fishbot/assets/templates/`.
-    3.  Se o problema persistir, tente **ajustar o valor de `precision`** no arquivo `src/fishbot/config/detection_config.py`. Diminuir o valor (ex: de `0.8` para `0.7`) pode ajudar a compensar pequenas diferenças visuais.
+*   **Symptom:** The bot stops reacting to a specific event that used to work, such as not swapping a broken rod or not detecting a bite.
+*   **Likely Cause:** The game may have received a minor visual update, changing the appearance of the icon or image the bot is looking for.
+*   **Solution:**
+    1.  **Take a new screenshot** of the failed image (e.g., the broken rod icon).
+    2.  **Replace the corresponding template file** in the `src/fishbot/assets/templates/` folder.
+    3.  If the problem persists, try **adjusting the `precision` value** in the `src/fishbot/config/detection_config.py` file. Lowering the value (e.g., from `0.8` to `0.7`) can help compensate for minor visual differences.
 
 ---
 
-## ⚙️ Configuração
+## Configuration
 
-O comportamento do bot pode ser ajustado através dos arquivos localizados em `src/fishbot/config/`.
+The bot's behavior can be adjusted through the files located in `src/fishbot/config/`.
 
 #### `screen_config.py`
-Define a área de captura da tela.
-*   `monitor_width`, `monitor_height`: Resolução da tela do jogo (padrão: 1920x1080).
-*   `monitor_x`, `monitor_y`: Coordenadas do canto superior esquerdo do monitor onde o jogo está. Para o monitor principal, mantenha `(0, 0)`.
+Defines the screen capture area.
+*   `monitor_width`, `monitor_height`: The game's screen resolution (default: 1920x1080).
+*   `monitor_x`, `monitor_y`: Coordinates of the top-left corner of the monitor where the game is running. For the primary monitor, keep this as `(0, 0)`.
 
 #### `detection_config.py`
-Controla a detecção de imagem.
-*   `precision`: A confiança mínima (de `0.0` a `1.0`) para que um template seja considerado encontrado.
-*   `templates`: Mapeia nomes de eventos para os arquivos de imagem correspondentes em `src/fishbot/assets/templates/`.
-*   `rois` (Regiões de Interesse): Define retângulos `(x, y, largura, altura)` para limitar a área de busca de cada template, aumentando a performance e a precisão.
+Controls image detection.
+*   `precision`: The minimum confidence (from `0.0` to `1.0`) for a template to be considered a match.
+*   `templates`: Maps event names to their corresponding image files in `src/fishbot/assets/templates/`.
+*   `rois` (Regions of Interest): Defines rectangles `(x, y, width, height)` to limit the search area for each template, increasing performance and accuracy.
 
 #### `bot_config.py`
-Configurações gerais do bot.
-*   `state_timeouts`: Tempo máximo que o bot pode permanecer em cada estado antes de resetar.
-*   `target_fps`: Limite de capturas de tela por segundo (0 para ilimitado).
-*   `default_delay`: Pausas padrão entre as ações.
+General bot settings.
+*   `state_timeouts`: Maximum time the bot can remain in each state before resetting.
+*   `target_fps`: Target frames per second for screen captures (0 for unlimited).
+*   `default_delay`: Default delays between actions.
 
 ---
 
-## 🔧 Para Desenvolvedores
+## For Developers
 
-### Arquitetura
+### Architecture
 
-O bot utiliza uma **Máquina de Estados Finitos (FSM)** para gerenciar seu fluxo de trabalho. A lógica é dividida da seguinte forma:
+The bot uses a **Finite State Machine (FSM)** to manage its workflow. The logic is divided as follows:
 
-*   **`main.py`**: Ponto de entrada que inicializa e executa o bot.
-*   **`src/fishbot/core/state/`**: Contém a lógica da máquina de estados.
-    *   `state_machine.py`: Gerencia o estado atual e as transições.
-    *   `impl/`: Abriga as classes para cada estado concreto (`CheckingRodState`, `PlayingMinigameState`, etc.), onde cada uma implementa uma única responsabilidade.
-*   **`src/fishbot/core/game/`**: Módulos que interagem diretamente com o jogo.
-    *   `detector.py`: Responsável pela captura de tela e detecção de templates usando `mss` e `OpenCV`.
-    *   `controller.py`: Simula entradas de teclado e mouse.
-*   **`src/fishbot/utils/`**: Utilitários, como a função de log.
+*   **`main.py`**: The entry point that initializes and runs the bot.
+*   **`src/fishbot/core/state/`**: Contains the state machine logic.
+    *   `state_machine.py`: Manages the current state and transitions.
+    *   `impl/`: Houses the classes for each concrete state (`CheckingRodState`, `PlayingMinigameState`, etc.), where each implements a single responsibility.
+*   **`src/fishbot/core/game/`**: Modules that interact directly with the game.
+    *   `detector.py`: Responsible for screen capture and template detection using `mss` and `OpenCV`.
+    *   `controller.py`: Simulates keyboard and mouse inputs.
+*   **`src/fishbot/utils/`**: Utility modules, such as the logger function.
 
-### Estrutura do Projeto
+### Project Structure
 
 ```
 BPSR-Fishing-Bot/
 ├── src/
 │   └── fishbot/
-│       ├── assets/         # Imagens (templates) para detecção
-│       ├── config/         # Arquivos de configuração do bot
+│       ├── assets/         # Images (templates) for detection
+│       ├── config/         # Bot configuration files
 │       ├── core/
-│       │   ├── game/       # Módulos de interação com o jogo (Detector, Controller)
-│       │   └── state/      # Lógica da Máquina de Estados
-│       ├── ui/             # (Reservado para futura interface gráfica)
-│       └── utils/          # Módulos utilitários
+│       │   ├── game/       # Game interaction modules (Detector, Controller)
+│       │   └── state/      # State Machine Logic
+│       ├── ui/             # (Reserved for a future GUI)
+│       └── utils/          # Utility modules
 ├── .gitignore
-├── main.py                 # Ponto de entrada da aplicação
+├── main.py                 # Application entry point
 ├── README.md
 └── requirements.txt
 ```
 
-## 🎯 Planos Futuros
+## Future Plans
 
-*   [ ] Interface gráfica (GUI) para facilitar a configuração.
-*   [ ] Sistema de hotkeys para iniciar/parar o bot.
-*   [ ] Melhorar a resiliência a eventos inesperados no jogo.
+*   [ ] Graphical user interface (GUI) for easier configuration.
+*   [ ] Hotkey system to start/stop the bot.
+*   [ ] Improve resilience to unexpected in-game events.
+*   [ ] Add a State to buy baits and rods.
 
 ---
 
-Sinta-se à vontade para abrir uma *issue* ou enviar uma *pull request*!
+Feel free to open an *issue* or submit a *pull request*!
