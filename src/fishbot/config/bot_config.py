@@ -11,9 +11,9 @@ class BotConfig:
             "STARTING": 10,
             "CHECKING_ROD": 15,
             "CASTING_BAIT": 15,
-            "WAITING_FOR_BITE": 30,
-            "PLAYING_MINIGAME": 60,
-            "FINISHING": 30
+            "WAITING_FOR_BITE": 25,
+            "PLAYING_MINIGAME": 40,
+            "FINISHING": 10
         }
 
         # Habilitar finalização rápida após o minigame
@@ -21,16 +21,13 @@ class BotConfig:
 
         self.debug_mode = False
 
-        # Precisão de deteção (0.0 a 1.0)
-        self.precision = 0.7
-
         # FPS alvo (capturas por segundo)
         # 0 significa sem limite
         self.target_fps = 0
 
+        # Tempo para iniciar o boot (em segundos)
+        self.start_time_delay = 10
+
         # Delays (em segundos)
         self.default_delay = 1.0
-        self.finish_wait_delay = 1.5  # Delay para o Guard Rail 3
-
-        # Coordenadas para trocar vara (x, y relativo à tela capturada)
-        self.new_rod_coord = (1626, 565)
+        self.finish_wait_delay = 1.5

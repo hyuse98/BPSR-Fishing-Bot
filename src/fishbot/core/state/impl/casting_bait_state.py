@@ -1,6 +1,7 @@
 import time
 
-from .bot_state import BotState
+from ..bot_state import BotState
+from ..state_type import StateType
 
 
 class CastingBaitState(BotState):
@@ -26,4 +27,4 @@ class CastingBaitState(BotState):
         self.controller.mouse_up('left')
         time.sleep(2)
 
-        return "WAITING_FOR_BITE"
+        return StateType.WAITING_FOR_BITE

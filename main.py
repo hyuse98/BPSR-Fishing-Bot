@@ -1,4 +1,4 @@
-from src.fishbot.core.bot import FishingBot
+from src.fishbot.core.fishing_bot import FishingBot
 
 if __name__ == "__main__":
     bot = FishingBot()
