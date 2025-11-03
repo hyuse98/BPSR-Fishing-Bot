@@ -1,6 +1,7 @@
 import time
 
-from .bot_state import BotState
+from ..bot_state import BotState
+from ..state_type import StateType
 
 
 class FinishingState(BotState):
@@ -10,13 +11,6 @@ class FinishingState(BotState):
 
     def handle(self, screen):
 
-        # # --- [GUARD RAIL 1 (Interceptor)] ---
-        # new_state = self.level_check_interceptor.check(screen)
-        # if new_state:
-        #     self.bot.log("[FINISHING] ⚠️ Level Check detectado durante o finalização.")
-        #     return new_state
-        # # --- [FIM DO GUARD RAIL] ---
-
         pos = self.detector.find(screen, "continue")
 
         if pos:
@@ -25,4 +19,9 @@ class FinishingState(BotState):
             time.sleep(0.2)
             self.controller.click('left')
 
-        return "FINISHING"
+            return StateType.STARTING
+
+        if self.detector.find(screen, "fishing_spot"):
+            return StateType.STARTING
+
+        return StateType.FINISHING
