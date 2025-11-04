@@ -1,15 +1,17 @@
 <p align="right">
-  <a href="./README.md">English</a>
+  <a href="./README.md">English</a> |
+  <a href="./README.pt-BR.md">Português (Brasil)</a>
 </p>
 
 <p align="left">
+    <a href="#"><img alt="Status do Build" src="https://github.com/your-username/BPSR-Fishing-Bot/actions/workflows/main.yml/badge.svg"></a>
     <a href="#"><img alt="Versão do Projeto" src="https://img.shields.io/badge/version-1.0.0-blue"></a>
     <a href="./LICENSE"><img alt="Licença" src="https://img.shields.io/badge/license-GPL--3.0-brightgreen"></a>
     <a href="https://www.python.org"><img alt="Python" src="https://img.shields.io/badge/Python-3.8+-3776AB?logo=python"></a>
     <a href="https://opencv.org"><img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-4.x-5C3EE8?logo=opencv"></a>
 </p>
 
-# BPSR: Fishing Bot
+# BPSR Fishing Bot
 
 Um bot de pesca automatizado e de código aberto, construído em Python. Ele utiliza detecção de imagem para identificar eventos na tela e interagir com o minigame de pesca de um jogo, automatizando todo o processo.
 
@@ -36,6 +38,7 @@ Um bot de pesca automatizado e de código aberto, construído em Python. Ele uti
 *   **Pesca Totalmente Automatizada:** Lança a isca, detecta a fisgada e inicia o minigame.
 *   **Minigame Player Inteligente:** Joga o minigame de forma autônoma, movendo para a esquerda e para a direita conforme necessário.
 *   **Troca Automática de Vara:** Detecta quando a vara de pescar quebra e a substitui por uma nova, permitindo sessões de pesca ininterruptas.
+*   **Controle por Hotkeys:** Inicie, pause, retome e encerre o bot facilmente usando teclas de atalho (F1 e F2).
 *   **Configuração Flexível:** Permite ajustar facilmente a precisão da detecção, as regiões de interesse (ROI) e os tempos de espera através de arquivos de configuração dedicados.
 *   **Arquitetura Robusta:** Construído com uma máquina de estados e princípios de design sólidos, tornando o código fácil de entender e estender.
 
@@ -46,7 +49,7 @@ Um bot de pesca automatizado e de código aberto, construído em Python. Ele uti
 ### 1. Pré-requisitos
 
 *   **Python 3.8+**
-*   O jogo configurado para rodar em modo janela na resolução **1920x1080** (Por Enquanto...).
+*   O jogo configurado para rodar em modo janela na resolução **1920x1080**.
 
 ### 2. Instalação
 
@@ -68,7 +71,7 @@ Um bot de pesca automatizado e de código aberto, construído em Python. Ele uti
     ```bash
     python main.py
     ```
-3.  O bot iniciará a execução. Para pará-lo, pressione `Ctrl+C` no terminal.
+3.  O bot estará pronto. Pressione **F1** para iniciar/pausar e **F2** para encerrar o bot a qualquer momento.
 
 ---
 
@@ -147,9 +150,8 @@ BPSR-Fishing-Bot/
 ## Planos Futuros
 
 *   [ ] Interface gráfica (GUI) para facilitar a configuração.
-*   [ ] Sistema de hotkeys para iniciar/parar o bot.
+*   [x] Sistema de hotkeys para iniciar/parar o bot.
 *   [ ] Melhorar a resiliência a eventos inesperados no jogo.
-*   [ ] Adicionar um estado para comprar iscas e varas
 
 ---
 
