@@ -25,9 +25,6 @@ class BotConfig:
         # 0 significa sem limite
         self.target_fps = 0
 
-        # Tempo para iniciar o boot (em segundos)
-        self.start_time_delay = 10
-
         # Delays (em segundos)
         self.default_delay = 1.0
         self.finish_wait_delay = 1.5
