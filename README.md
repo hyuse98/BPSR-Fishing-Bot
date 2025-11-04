@@ -1,21 +1,23 @@
 <p align="right">
-  <a href="./README.pt-br.md">Português (Brasil)</a>
+  <a href="./README.md">English</a> |
+  <a href="./README.pt-BR.md">Português (Brasil)</a>
 </p>
 
-<p align="left">    
+<p align="left">
+    <a href="#"><img alt="Build Status" src="https://github.com/your-username/BPSR-Fishing-Bot/actions/workflows/main.yml/badge.svg"></a>
     <a href="#"><img alt="Project Version" src="https://img.shields.io/badge/version-1.0.0-blue"></a>
     <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-brightgreen"></a>
     <a href="https://www.python.org"><img alt="Python" src="https://img.shields.io/badge/Python-3.8+-3776AB?logo=python"></a>
     <a href="https://opencv.org"><img alt="OpenCV" src="https://img.shields.io/badge/OpenCV-4.x-5C3EE8?logo=opencv"></a>
 </p>
 
-# BPSR: Fishing Bot
+# BPSR Fishing Bot
 
 An automated and open-source fishing bot built in Python. It uses image detection to identify on-screen events and interact with a game's fishing minigame, automating the entire process.
 
 ---
 
-##  Table of Contents
+## Table of Contents
 
 *   [Features](#features)
 *   [Quick Start Guide](#quick-start-guide)
@@ -36,6 +38,7 @@ An automated and open-source fishing bot built in Python. It uses image detectio
 *   **Fully Automated Fishing:** Casts the line, detects a bite, and starts the minigame.
 *   **Smart Minigame Player:** Autonomously plays the fishing minigame, moving left and right as needed.
 *   **Automatic Rod Swapping:** Detects when the fishing rod breaks and replaces it with a new one, allowing for uninterrupted fishing sessions.
+*   **Hotkey Control:** Easily start, pause, resume, and stop the bot using hotkeys (F1 and F2).
 *   **Flexible Configuration:** Allows for easy adjustment of detection precision, regions of interest (ROI), and wait times through dedicated configuration files.
 *   **Robust Architecture:** Built with a state machine and solid design principles, making the code easy to understand and extend.
 
@@ -46,7 +49,7 @@ An automated and open-source fishing bot built in Python. It uses image detectio
 ### 1. Prerequisites
 
 *   **Python 3.8+**
-*   The game configured to run in windowed mode at **1920x1080** resolution (for now...).
+*   The game configured to run in windowed mode at **1920x1080** resolution.
 
 ### 2. Installation
 
@@ -68,7 +71,7 @@ An automated and open-source fishing bot built in Python. It uses image detectio
     ```bash
     python main.py
     ```
-3.  The bot will start running. To stop it, press `Ctrl+C` in the terminal.
+3.  The bot will be ready. Press **F1** to start/pause and **F2** to stop the bot at any time.
 
 ---
 
@@ -147,9 +150,8 @@ BPSR-Fishing-Bot/
 ## Future Plans
 
 *   [ ] Graphical user interface (GUI) for easier configuration.
-*   [ ] Hotkey system to start/stop the bot.
+*   [x] Hotkey system to start/stop the bot.
 *   [ ] Improve resilience to unexpected in-game events.
-*   [ ] Add a State to buy baits and rods.
 
 ---
 
