@@ -28,8 +28,12 @@ class FishingBot:
 
         self.level_check_interceptor = LevelCheckInterceptor(self)
 
-        self.running = True
+        self._stopped = False
         self.debug_mode = self.config.bot.debug_mode
+
+        self.target_delay = 0
+        if self.config.bot.target_fps > 0:
+            self.target_delay = 1.0 / self.config.bot.target_fps
 
         self._register_states()
 
@@ -41,38 +45,37 @@ class FishingBot:
         self.state_machine.add_state(StateType.PLAYING_MINIGAME, PlayingMinigameState(self))
         self.state_machine.add_state(StateType.FINISHING, FinishingState(self))
 
-
-
-    def run(self):
-        log("[INFO] 🎣  Bot iniciado! Pressione Ctrl+C para parar")
-        log("[INFO] ⚠️  IMPORTANTE: Mantenha o jogo em FOCO (janela ativa)")
-        log(f"[INFO] ⚙️  Precisão: {self.config.bot.detection.precision * 100:.0f}%")
-        log(f"[INFO] ⚙️  FPS alvo: {'MAX' if self.config.bot.target_fps == 0 else self.config.bot.target_fps}")
-        log(f"[INFO] 🕐 Aguardando {self.config.bot.start_time_delay} segundos para você focar no jogo...")
-        time.sleep(self.config.bot.start_time_delay)
-        log("[INFO] ▶️  Iniciando bot!")
-
+    def start(self):
+        log("[INFO] 🎣 Bot pronto!")
+        log("[INFO] ⚠️ IMPORTANTE: Mantenha o jogo em FOCO (janela ativa)")
+        log(f"[INFO] ⚙️ Precisão: {self.config.bot.detection.precision * 100:.0f}%")
+        log(f"[INFO] ⚙️ FPS alvo: {'MAX' if self.config.bot.target_fps == 0 else self.config.bot.target_fps}")
         self.state_machine.set_state(StateType.STARTING)
 
-        target_delay = 1.0 / self.config.bot.target_fps if self.config.bot.target_fps > 0 else 0
+    def update(self):
+        if self._stopped:
+            return
 
-        try:
-            while self.running:
-                loop_start = time.time()
+        loop_start = time.time()
 
-                screen = self.detector.capture_screen()
-                self.state_machine.handle(screen)
+        screen = self.detector.capture_screen()
+        self.state_machine.handle(screen)
 
-                if target_delay > 0:
-                    loop_time = time.time() - loop_start
-                    sleep_time = max(0, target_delay - loop_time)
-                    if sleep_time > 0:
-                        time.sleep(sleep_time)
+        if self.target_delay > 0:
+            loop_time = time.time() - loop_start
+            sleep_time = max(0, self.target_delay - loop_time)
+            if sleep_time > 0:
+                time.sleep(sleep_time)
 
-        except KeyboardInterrupt:
-            log("[BOT] 🛑 Bot encerrado pelo usuário")
+    def stop(self):
+        if not self._stopped:
+            self.log("[BOT] 🛑 Encerrando o bot...")
+            self._stopped = True
             try:
                 self.controller.release_all_controls()
             except Exception as e:
-                pass
+                self.log(f"[ERRO] Falha ao liberar controles: {e}")
             self.stats.show()
+
+    def is_stopped(self):
+        return self._stopped
