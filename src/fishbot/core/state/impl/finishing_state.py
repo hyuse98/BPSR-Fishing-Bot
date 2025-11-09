@@ -16,12 +16,14 @@ class FinishingState(BotState):
         if pos:
             self.bot.log("[FINISHING] 🖱️  Clicando em 'Continue'...")
             self.controller.move_to(pos[0], pos[1])
-            time.sleep(0.2)
+            time.sleep(0.5)
+            self.controller.move_to(pos[0], pos[1])
+            time.sleep(1)
             self.controller.click('left')
 
-            return StateType.STARTING
+            return StateType.CHECKING_ROD
 
-        if self.detector.find(screen, "fishing_spot"):
+        if self.detector.find(screen, "fishing_spot_btn"):
             return StateType.STARTING
 
         return StateType.FINISHING

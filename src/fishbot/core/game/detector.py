@@ -18,31 +18,42 @@ class Detector:
         self.screen_config = config.bot.screen
 
         self.templates = self._load_templates()
-        self.sct = mss.mss()
+        self.sct = None
         self.monitor = {
             'left': self.screen_config.monitor_x,
             'top': self.screen_config.monitor_y,
             'width': self.screen_config.monitor_width,
             'height': self.screen_config.monitor_height
         }
-        log("[INFO] ✅ MSS inicializado")
 
     def _load_templates(self):
         loaded = {}
         log("[INFO] 📦 Carregando templates...")
         for name in self.detection_config.templates:
             path = self.unified_config.get_template_path(name)
-            if path and path.exists():
-                img = cv.imread(str(path), cv.IMREAD_UNCHANGED)
-                if len(img.shape) == 3 and img.shape[2] == 4:
-                    img = cv.cvtColor(img, cv.COLOR_BGRA2BGR)
-                loaded[name] = img
-                log(f"[INFO] ✅ {name}")
-            else:
+            if not (path and path.exists()):
                 log(f"[INFO] ❌ {name} - não encontrado em '{path}'")
+                continue
+
+            img = cv.imread(str(path), cv.IMREAD_UNCHANGED)
+            template_img, mask = None, None
+
+            if img.shape[2] == 4:
+                log(f"[INFO] ✅ {name} (com máscara de transparência)")
+                mask = img[:, :, 3]
+                template_img = cv.cvtColor(img, cv.COLOR_BGRA2BGR)
+            else:
+                log(f"[INFO] ✅ {name}")
+                template_img = img
+            
+            loaded[name] = (template_img, mask)
         return loaded
 
     def capture_screen(self):
+        if self.sct is None:
+            self.sct = mss.mss()
+            log("[INFO] ✅ MSS inicializado na thread do bot")
+
         screenshot = self.sct.grab(self.monitor)
         img = np.array(screenshot)
         return cv.cvtColor(img, cv.COLOR_BGRA2BGR)
@@ -69,11 +80,16 @@ class Detector:
 
         return screen, (0, 0)
 
-    def _perform_match(self, search_area, template):
-        if search_area.shape[0] < template.shape[0] or search_area.shape[1] < template.shape[1]:
+    def _perform_match(self, search_area, template_data):
+        template_img, mask = template_data
+
+        search_gray = cv.cvtColor(search_area, cv.COLOR_BGR2GRAY)
+        template_gray = cv.cvtColor(template_img, cv.COLOR_BGR2GRAY)
+
+        if search_gray.shape[0] < template_gray.shape[0] or search_gray.shape[1] < template_gray.shape[1]:
             return None, None
 
-        result = cv.matchTemplate(search_area, template, cv.TM_CCOEFF_NORMED)
+        result = cv.matchTemplate(search_gray, template_gray, cv.TM_CCOEFF_NORMED, mask=mask)
         _, confidence, _, location = cv.minMaxLoc(result)
         return confidence, location
 
@@ -90,21 +106,23 @@ class Detector:
             log(f"[INFO] ❌ Template '{template_name}' não foi carregado.")
             return None
 
-        template = self.templates[template_name]
-        search_area, offset = self._get_search_area(screen, template_name)
+        template_data = self.templates[template_name]
+        template_img, _ = template_data
 
-        confidence, location = self._perform_match(search_area, template)
+        search_area, offset = self._get_search_area(screen, template_name)
+        confidence, location = self._perform_match(search_area, template_data)
 
         if confidence is None:
             return None
 
-        is_match = confidence >= self.detection_config.precision
+        precision = self.detection_config.precision
+        is_match = confidence >= precision
 
         if debug:
             status = 'MATCH' if is_match else 'NO MATCH'
-            log(f"[DEBUG] [{template_name}] Confiança: {confidence:.2%} (precisa: {self.detection_config.precision:.0%}) -> {status}")
+            log(f"[DEBUG] [{template_name}] Confiança: {confidence:.2%} (precisa: {precision:.0%}) -> {status}")
 
         if is_match:
-            return self._calculate_center(location, template.shape[:2], offset)
+            return self._calculate_center(location, template_img.shape[:2], offset)
 
         return None
