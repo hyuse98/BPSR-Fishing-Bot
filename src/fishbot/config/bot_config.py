@@ -17,7 +17,7 @@ class BotConfig:
         }
 
         # Habilitar finalização rápida após o minigame
-        self.quick_finish_enabled = True
+        self.quick_finish_enabled = False
 
         self.debug_mode = False
 

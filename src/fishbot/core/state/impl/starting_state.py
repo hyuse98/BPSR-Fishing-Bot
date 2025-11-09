@@ -12,7 +12,7 @@ class StartingState(BotState):
 
     def handle(self, screen):
 
-        pos = self.detector.find(screen, "fishing_spot", debug=self.bot.debug_mode)
+        pos = self.detector.find(screen, "fishing_spot_btn", debug=self.bot.debug_mode)
 
         if pos:
             self.bot.log(f"[STARTING] ✅ Ponto de pesca detectado em {pos}")
