@@ -13,6 +13,9 @@
 
 # BPSR Fishing Bot
 
+### Note: Note: If you want a more complete and robust version, I have made my personal version available. 
+[Java Version](https://github.com/hyuse98/BPSR-Fishing-Bot-Java)
+
 ## This Project will not be updated by me anymore
 ### The Reason is Simple, i'm no longer active on Blue Protocol. tks u all
 
@@ -141,7 +144,7 @@ The bot uses a **Finite State Machine (FSM)** to manage its workflow. The logic 
 
 ### Project Structure
 
-```
+```plain
 BPSR-Fishing-Bot/
 ├── src/
 │   └── fishbot/
@@ -158,12 +161,12 @@ BPSR-Fishing-Bot/
 └── requirements.txt
 ```
 
-## Future Plans
+## ~~Future Plans~~ 
 
-*   [ ] Graphical user interface (GUI) for easier configuration.
-*   [x] Hotkey system to start/stop the bot.
-*   [ ] Improve resilience to unexpected in-game events.
+*   [ ] ~~Graphical user interface (GUI) for easier configuration.~~
+*   [x] ~~Hotkey system to start/stop the bot.~~
+*   [ ] ~~Improve resilience to unexpected in-game events.~~
 
----
+This is all available [Here](https://github.com/hyuse98/BPSR-Fishing-Bot-Java)
 
-Feel free to open an *issue* or submit a *pull request*!
+~~Feel free to open an *issue* or submit a *pull request*!~~
